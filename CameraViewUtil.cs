@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Utilties
+namespace Utilities
 {
     public class CameraViewUtil
     {

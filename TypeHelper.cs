@@ -1,6 +1,6 @@
 using System;
 
-namespace Utilties
+namespace Utilities
 {
     public class TypeHelper
     {

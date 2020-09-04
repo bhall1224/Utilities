@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Utilties
+namespace Utilities
 {
     public class VectorAnalysis
     {

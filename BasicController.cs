@@ -1,23 +1,28 @@
-using Constants;
 using UnityEngine;
 
 
-namespace Utilties
+namespace Utilities
 {
     public class BasicController
     {
         public delegate void ActionCallback();
 
-        public delegate void AnimationCallback(string input);
+        public delegate void AnimationCallback(
+            bool travelAnimation = false, 
+            bool actionAnimation = false, 
+            bool idleAnimation = false);
 
         public static void DefaultActionCallback()
         {
             Debug.Log("no action implemented...");
         }
 
-        public static void DefaultAnimationCallback(string input)
+        public static void DefaultAnimationCallback(
+            bool travelAnimation = false, 
+            bool actionAnimation = false, 
+            bool idleAnimation = false)
         {
-            Debug.Log($"animation state: {input}");
+            Debug.Log($"animation state => Travel {travelAnimation} :: Action {actionAnimation} :: Idle {idleAnimation}");
         }
 
         public static void FirstPersonControlHandler(
@@ -43,37 +48,38 @@ namespace Utilties
             if (actionCallback == null)
                 actionCallback = DefaultActionCallback;
 
-            if (Input.GetKey(ControlConstants.Forward) || Input.GetKey(ControlConstants.ForwardAlt))
+            if (Input.GetKey(Controls.Forward) || Input.GetKey(Controls.ForwardAlt))
             {
                 displacement = VectorAnalysis.CalculateDisplacementFromAngle(rotation);
-                animationCallback(AnimationConstants.WalkState);
+                animationCallback(travelAnimation: true);
             }
 
-            if (Input.GetKey(ControlConstants.Reverse) || Input.GetKey(ControlConstants.ReverseAlt))
+            if (Input.GetKey(Controls.Reverse) || Input.GetKey(Controls.ReverseAlt))
             {
                 displacement = VectorAnalysis.CalculateDisplacementFromAngle(rotation) * -1;
-                animationCallback(AnimationConstants.WalkState);
+                animationCallback(travelAnimation: true);
             }
 
-            if (Input.GetKey(ControlConstants.Left))
+            if (Input.GetKey(Controls.Left))
             {
                 rotation.y += -5.0f;
             }
 
-            if (Input.GetKey(ControlConstants.Right))
+            if (Input.GetKey(Controls.Right))
             {
                 rotation.y += 5.0f;
             }
 
-            if (Input.GetKey(ControlConstants.Space))
+            if (Input.GetKey(Controls.Space))
             {
                 action = true;
                 actionCallback();
+                animationCallback(actionAnimation: true);
             }
 
             if (displacement == Vector3.zero && !action)
             {
-                animationCallback(AnimationConstants.IdleState);
+                animationCallback(idleAnimation: true);
             }
         }
 
@@ -98,37 +104,38 @@ namespace Utilties
             if (actionCallback == null)
                 actionCallback = DefaultActionCallback;
 
-            if (Input.GetKey(ControlConstants.Forward))
+            if (Input.GetKey(Controls.Forward))
             {
                 rotationalVector.y = 0.0f;
                 displacementVector.z = 1;
-                animationCallback(AnimationConstants.WalkState);
+                animationCallback(travelAnimation: true);
             }
-            else if (Input.GetKey(ControlConstants.Reverse))
+            else if (Input.GetKey(Controls.Reverse))
             {
                 rotationalVector.y = 180.0f;
                 displacementVector.z = -1;
-                animationCallback(AnimationConstants.WalkState);
+                animationCallback(travelAnimation: true);
             }
-            else if (Input.GetKey(ControlConstants.Left))
+            else if (Input.GetKey(Controls.Left))
             {
                 rotationalVector.y = 270;
                 displacementVector.x = -1;
-                animationCallback(AnimationConstants.WalkState);
+                animationCallback(travelAnimation: true);
             }
-            else if (Input.GetKey(ControlConstants.Right))
+            else if (Input.GetKey(Controls.Right))
             {
                 rotationalVector.y = 90.0f;
                 displacementVector.x = 1;
-                animationCallback(AnimationConstants.WalkState);
+                animationCallback(travelAnimation: true);
             }
-            else if (Input.GetKey(ControlConstants.Space))
+            else if (Input.GetKey(Controls.Space))
             {
                 actionCallback();
+                animationCallback(actionAnimation: true);
             }
             else
             {
-                animationCallback(AnimationConstants.IdleState);
+                animationCallback(idleAnimation: true);
             }
         }
 
@@ -158,6 +165,7 @@ namespace Utilties
             if (buttonPressed)
             {
                 actionCallback();
+                animationCallback(actionAnimation: true);
             }
 
             rotationalVector.y += xVelocity;
@@ -167,11 +175,11 @@ namespace Utilties
             if (displacementVector != Vector3.zero
                 && rotationalVector != transform.rotation.eulerAngles)
             {
-                animationCallback(AnimationConstants.WalkState);
+                animationCallback(travelAnimation: true);
             }
             else
             {
-                animationCallback(AnimationConstants.IdleState);
+                animationCallback(idleAnimation: true);
             }
         }
 
@@ -201,15 +209,18 @@ namespace Utilties
                 actionCallback = DefaultActionCallback;
 
             if (buttonPressed)
+            {
                 actionCallback();
+                animationCallback(actionAnimation: true);
+            }
 
             if (displacementVector != Vector3.zero)
             {
-                animationCallback(AnimationConstants.WalkState);
+                animationCallback(travelAnimation: true);
             }
             else
             {
-                animationCallback(AnimationConstants.IdleState);
+                animationCallback(idleAnimation: true);
             }
         }
 
@@ -237,37 +248,38 @@ namespace Utilties
             if (actionCallback == null)
                 actionCallback = DefaultActionCallback;
 
-            if (Input.GetKey(ControlConstants.Forward))
+            if (Input.GetKey(Controls.Forward))
             {
                 displacement = VectorAnalysis.CalculateDisplacementFromAngle2D(rotation);
-                animationCallback(AnimationConstants.WalkState);
+                animationCallback(travelAnimation: true);
             }
 
-            if (Input.GetKey(ControlConstants.Reverse))
+            if (Input.GetKey(Controls.Reverse))
             {
                 displacement = VectorAnalysis.CalculateDisplacementFromAngle2D(rotation) * -1;
-                animationCallback(AnimationConstants.WalkState);
+                animationCallback(travelAnimation: true);
             }
 
-            if (Input.GetKey(ControlConstants.Left))
+            if (Input.GetKey(Controls.Left))
             {
                 rotation.z += rotationAmount;
             }
 
-            if (Input.GetKey(ControlConstants.Right))
+            if (Input.GetKey(Controls.Right))
             {
                 rotation.z -= rotationAmount;
             }
 
-            if (Input.GetKey(ControlConstants.Space))
+            if (Input.GetKey(Controls.Space))
             {
                 action = true;
                 actionCallback();
+                animationCallback(actionAnimation: true);
             }
 
             if (displacement == Vector3.zero && !action)
             {
-                animationCallback(AnimationConstants.IdleState);
+                animationCallback(idleAnimation: true);
             }
         }
 
@@ -298,6 +310,7 @@ namespace Utilties
             if (buttonPressed)
             {
                 actionCallback();
+                animationCallback(actionAnimation: true);
             }
 
             rotationalVector.z -= xVelocity * rotationAmount;
@@ -309,11 +322,11 @@ namespace Utilties
                 && rotationalVector != transform.rotation.eulerAngles)
                 || rotationalVector != Vector3.zero))
             {
-                animationCallback(AnimationConstants.WalkState);
+                animationCallback(travelAnimation: true);
             }
             else
             {
-                animationCallback(AnimationConstants.IdleState);
+                animationCallback(idleAnimation: true);
             }
         }
     }
