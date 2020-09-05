@@ -8,8 +8,8 @@ namespace Utilities
         public delegate void ActionCallback();
 
         public delegate void AnimationCallback(
-            bool travelAnimation = false, 
-            bool actionAnimation = false, 
+            bool travelAnimation = false,
+            bool actionAnimation = false,
             bool idleAnimation = false);
 
         public static void DefaultActionCallback()
@@ -18,8 +18,8 @@ namespace Utilities
         }
 
         public static void DefaultAnimationCallback(
-            bool travelAnimation = false, 
-            bool actionAnimation = false, 
+            bool travelAnimation = false,
+            bool actionAnimation = false,
             bool idleAnimation = false)
         {
             Debug.Log($"animation state => Travel {travelAnimation} :: Action {actionAnimation} :: Idle {idleAnimation}");
@@ -170,7 +170,7 @@ namespace Utilities
 
             rotationalVector.y += xVelocity;
 
-            displacementVector = VectorAnalysis.CalculateDisplacementFromAngle(rotationalVector);
+            displacementVector = VectorAnalysis.CalculateDisplacementFromAngle(rotationalVector) * zVelocity;
 
             if (displacementVector != Vector3.zero
                 && rotationalVector != transform.rotation.eulerAngles)
