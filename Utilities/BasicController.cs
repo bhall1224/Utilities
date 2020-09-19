@@ -1,7 +1,6 @@
 using UnityEngine;
 
-
-namespace Utilities
+namespace Madman.Games.Utilities
 {
     public class BasicController
     {
@@ -12,18 +11,12 @@ namespace Utilities
             bool actionAnimation = false,
             bool idleAnimation = false);
 
-        public static void DefaultActionCallback()
-        {
-            Debug.Log("no action implemented...");
-        }
+        public static void DefaultActionCallback() { }
 
         public static void DefaultAnimationCallback(
             bool travelAnimation = false,
             bool actionAnimation = false,
-            bool idleAnimation = false)
-        {
-            Debug.Log($"animation state => Travel {travelAnimation} :: Action {actionAnimation} :: Idle {idleAnimation}");
-        }
+            bool idleAnimation = false) { }
 
         public static void FirstPersonControlHandler(
             out Vector3 displacement,

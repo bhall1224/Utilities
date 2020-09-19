@@ -1,4 +1,4 @@
-namespace Utilities
+namespace Madman.Games.Utilities
 {
     public class Controls
     {

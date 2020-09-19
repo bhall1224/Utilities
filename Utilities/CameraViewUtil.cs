@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Utilities
+namespace Madman.Games.Utilities
 {
     public class CameraViewUtil
     {
@@ -30,7 +30,6 @@ namespace Utilities
             Vector3 viewVector = new Vector3();
             if (!CameraViewUtil.IsInCameraView(camera, obj, out viewVector))
             {
-                Debug.Log($"Object: {obj.name} View Vector: {viewVector}");
                 if (viewVector.x >= positiveOffScreen)
                 {
                     obj.transform.position = new Vector3(
@@ -40,7 +39,6 @@ namespace Utilities
                 }
                 else if (viewVector.x <= negativeOffScreen)
                 {
-                    Debug.Log($"Object: {obj.name} View Vector: {viewVector}");
                     obj.transform.position = new Vector3(
                         obj.transform.position.x * -1 - 1,
                         obj.transform.position.y,
@@ -48,7 +46,6 @@ namespace Utilities
                 }
                 else if (viewVector.y >= positiveOffScreen)
                 {
-                    Debug.Log($"Object: {obj.name} View Vector: {viewVector}");
                     obj.transform.position = new Vector3(
                         obj.transform.position.x,
                         obj.transform.position.y * -1 + 1,
@@ -56,7 +53,6 @@ namespace Utilities
                 }
                 else if (viewVector.y <= negativeOffScreen)
                 {
-                    Debug.Log($"Object: {obj.name} View Vector: {viewVector}");
                     obj.transform.position = new Vector3(
                         obj.transform.position.x,
                         obj.transform.position.y * -1 - 1,

@@ -1,7 +1,6 @@
-using System;
 using UnityEngine;
 
-namespace Utilities
+namespace Madman.Games.Utilities
 {
     public class VectorAnalysis
     {

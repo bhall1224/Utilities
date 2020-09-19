@@ -1,6 +1,6 @@
 using System;
 
-namespace Utilities
+namespace Madman.Games.Utilities
 {
     public class TypeHelper
     {
