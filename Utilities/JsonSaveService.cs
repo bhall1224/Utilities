@@ -3,7 +3,7 @@ using System;
 using System.IO;
 using UnityEngine;
 
-namespace Madman.Games.CovidBlaster.Services
+namespace Madman.Games.Utilities
 {
     public class JsonSaveService
     {

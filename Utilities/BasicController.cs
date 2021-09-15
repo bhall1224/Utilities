@@ -191,9 +191,7 @@ namespace Madman.Games.Utilities
             if (transform == null)
                 rotationalVector = Vector3.zero;
             else
-                rotationalVector = transform.rotation.eulerAngles;
-
-            rotationalVector.y = VectorAnalysis.CalculateAngleFromDisplacement(displacementVector);
+                rotationalVector = transform.rotation.eulerAngles;            
 
             if (animationCallback == null)
                 animationCallback = DefaultAnimationCallback;
@@ -209,6 +207,7 @@ namespace Madman.Games.Utilities
 
             if (displacementVector != Vector3.zero)
             {
+                rotationalVector.y = VectorAnalysis.CalculateAngleFromDisplacement(displacementVector);
                 animationCallback(travelAnimation: true);
             }
             else
